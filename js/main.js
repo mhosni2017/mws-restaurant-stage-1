@@ -4,6 +4,20 @@ let restaurants,
 var map
 var markers = []
 
+/* Service worker*/
+if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('js/sw.js').then(function (registration) {
+          console.log('ServiceWorker registration succeeded ', registration);
+        }, function (error) {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+      });
+    }
+    else {
+      console.log('Service workers are not supported.');
+    }
+
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -76,9 +90,13 @@ window.initMap = () => {
     lng: -73.987501
   };
   self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
+    zoom: 8,
     center: loc,
     scrollwheel: false
+  });
+
+  google.maps.event.addDomListener(window, 'resize', function () {
+    map.setCenter(loc);
   });
   updateRestaurants();
 }
@@ -126,8 +144,10 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
+  let tabIndexno=3;
   restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
+    ul.append(createRestaurantHTML(restaurant,tabIndexno));
+    tabIndexno++;
   });
   addMarkersToMap();
 }
@@ -135,12 +155,13 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant) => {
+createRestaurantHTML = (restaurant, tabIndexno) => {
   const li = document.createElement('li');
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = restaurant.name + ' Image';
   li.append(image);
 
   const name = document.createElement('h1');
@@ -157,6 +178,8 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute('tabindex', tabIndexno.toString());
+  more.setAttribute('aria-label', 'View Details for ' + restaurant.name);
   more.href = DBHelper.urlForRestaurant(restaurant);
   li.append(more)
 
