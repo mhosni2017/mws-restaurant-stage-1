@@ -1,24 +1,39 @@
 let staticCacheName = 'mws-restaurant-cache';
-let contentImgsCache = 'mws-restaurant-content-imgs';
+var allCaches = [
+  staticCacheName
+];
 let urlsToCache = [
   '/skeleton',
   '/index.html',
   '/restaurant.html',
-  'css/*.css',
-  'js/*.js',
-  'img/*.jpg'
+  'css/styles.css',
+  'js/main.js',
+  'js/dbhelper.js',
+  'js/restaurant_info.js',
+  'img/1.jpg',
+  'img/2.jpg',
+  'img/3.jpg',
+  'img/4.jpg',
+  'img/5.jpg',
+  'img/6.jpg',
+  'img/7.jpg',
+  'img/8.jpg',
+  'img/9.jpg',
+  'img/10.jpg'
 ];
 
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(staticCacheName).then(function(cache) {
+      console.log("inside install")
         return cache.addAll(urlsToCache);
       })
   );
 });
 
 self.addEventListener('activate', function(event) {
+  console.log("inside activate")
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
       return Promise.all(
@@ -41,10 +56,6 @@ self.addEventListener('fetch', function(event) {
       event.respondWith(caches.match('/skeleton'));
       return;
     }
-    if (requestUrl.pathname.startsWith('/img/')) {
-      event.respondWith(servePhoto(event.request));
-      return;
-    }
 
   }
 
@@ -56,23 +67,8 @@ self.addEventListener('fetch', function(event) {
 });
 
 
-function servePhoto(request) {
-  let storageUrl = request.url.replace(/-\d+px\.jpg$/, '');
-
-  return caches.open(contentImgsCache).then(function(cache) {
-    return cache.match(storageUrl).then(function(response) {
-      if (response) return response;
-
-      return fetch(request).then(function(networkResponse) {
-        cache.put(storageUrl, networkResponse.clone());
-        return networkResponse;
-      });
-    });
-  });
-}
-
-self.addEventListener('message', function(event) {
+/*self.addEventListener('message', function(event) {
   if (event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
-});
+});*/

@@ -90,7 +90,7 @@ window.initMap = () => {
     lng: -73.987501
   };
   self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
+    zoom: 12,
     center: loc,
     scrollwheel: false
   });
@@ -98,6 +98,11 @@ window.initMap = () => {
   google.maps.event.addDomListener(window, 'resize', function () {
     map.setCenter(loc);
   });
+  google.maps.event.addListener(map, "tilesloaded", function(){
+    [].slice.apply(document.querySelectorAll('#map a')).forEach(function(item) {
+        item.setAttribute('tabindex','-1');
+    });
+  })
   updateRestaurants();
 }
 
