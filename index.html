@@ -26,7 +26,7 @@
         <select id="neighborhoods-select" tabindex="1" name="neighborhoods" aria-label="Select Neighborhood" onchange="updateRestaurants()">
           <option value="all">All Neighborhoods</option>
         </select>
-        
+
         <select id="cuisines-select" tabindex="2" name="cuisines" aria-label="Select Cusisine" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
@@ -38,7 +38,21 @@
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjt92SC4-Scxgs31HTV4mbOqPajQcV-VQ&libraries=places&callback=initMap"></script>
-
+  <script type="application/javascript" charset="utf-8">
+  /* Service worker*/
+  if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('sw.js').then(function (registration) {
+            console.log('ServiceWorker registration succeeded ', registration);
+          }, function (error) {
+            console.log('ServiceWorker registration failed: ', error);
+          });
+        });
+      }
+      else {
+        console.log('Service workers are not supported.');
+      }
+</script>
 
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.

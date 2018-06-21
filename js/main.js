@@ -4,19 +4,6 @@ let restaurants,
 var map
 var markers = []
 
-/* Service worker*/
-if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('js/sw.js').then(function (registration) {
-          console.log('ServiceWorker registration succeeded ', registration);
-        }, function (error) {
-          console.log('ServiceWorker registration failed: ', error);
-        });
-      });
-    }
-    else {
-      console.log('Service workers are not supported.');
-    }
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
