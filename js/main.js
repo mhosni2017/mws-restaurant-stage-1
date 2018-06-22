@@ -149,7 +149,17 @@ createRestaurantHTML = (restaurant, tabIndexno) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  const imgurlbase = DBHelper.imageUrlForRestaurant(restaurant);
+  const imgparts = imgurlbase.split('.') ;
+  const imgurl1x = imgparts[0]+'_1x.'+imgparts[1];
+  const imgurl2x = imgparts[0]+'_2x.'+imgparts[1];
+  image.src = imgurl1x;
+  console.log(imgurl1x);
+  console.log(imgurl2x);
+
+  image.srcset = `${imgurl1x} 700w, ${imgurl2x} 1200w`;
+  console.log(image.srcset);
+
   image.alt = restaurant.name + ' Image';
   li.append(image);
 
