@@ -1,3 +1,4 @@
+/* code used here from the udacity course and google developers Caching Files with Service Worker samples*/
 let staticCacheName = 'mws-restaurant-cache-1';
 var allCaches = [
   staticCacheName
