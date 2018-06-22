@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(event) {
   let requestUrl = new URL(event.request.url);
   event.respondWith(
     caches.open(staticCacheName).then(function(cache) {
-      caches.match(event.request).then(function(response) {
+      return caches.match(event.request).then(function(response) {
         return response || fetch(event.request).then(function(response) {
           cache.put(event.request, response.clone());
           return response;
@@ -60,10 +60,3 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
-
-
-/*self.addEventListener('message', function(event) {
-  if (event.data.action === 'skipWaiting') {
-    self.skipWaiting();
-  }
-});*/

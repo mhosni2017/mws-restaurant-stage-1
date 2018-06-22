@@ -85,11 +85,8 @@ window.initMap = () => {
   google.maps.event.addDomListener(window, 'resize', function () {
     map.setCenter(loc);
   });
-  google.maps.event.addListener(map, "tilesloaded", function(){
-    [].slice.apply(document.querySelectorAll('#map a')).forEach(function(item) {
-        item.setAttribute('tabindex','-1');
-    });
-  })
+
+
   updateRestaurants();
 }
 
