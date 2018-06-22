@@ -3,10 +3,11 @@
 
 <head>
   <!-- Normalize.css for better cross-browser consistency -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <!-- Main CSS file -->
   <link rel="stylesheet" href="css/styles.css" type="text/css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Restaurant Info</title>
 </head>
 
@@ -15,10 +16,10 @@
   <header>
     <!-- Beginning nav -->
     <nav>
-      <h1><a href="/" aria-label="Link to Restaurant Reviews" >Restaurant Reviews</a></h1>
+      <h2><a href="/" aria-label="Link to Restaurant Reviews" >Restaurant Reviews</a></h2>
     </nav>
     <!-- Beginning breadcrumb -->
-    <ul id="breadcrumb" >
+    <ul id="breadcrumb" aria-label="Breadcrumb" >
       <li><a href="/" aria-label="Link to Home" >Home</a></li>
     </ul>
     <!-- End breadcrumb -->
@@ -30,12 +31,12 @@
   <main id="maincontent">
     <!-- Beginning map -->
     <section id="map-container">
-      <div id="map" aria-hidden="true" role="presentation" tabindex="-1"></div>
+      <div id="map" aria-hidden="true" role="application" tabindex="-1"></div>
     </section>
     <!-- End map -->
     <!-- Beginning restaurant -->
     <section id="restaurant-container">
-      <h1 id="restaurant-name"></h1>
+      <h3 id="restaurant-name"></h3>
       <img id="restaurant-img">
       <p id="restaurant-cuisine"></p>
       <p id="restaurant-address"></p>

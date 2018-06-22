@@ -72,11 +72,11 @@ nav {
   background-color: #252831;
   text-align:center;
 }
-nav h1 {
+nav h2 {
   /*margin: auto;*/
 	width: 100%;
 }
-nav h1 a {
+nav h2 a {
   color: #fff;
   font-size: 14pt;
   font-weight: 200;
@@ -289,7 +289,7 @@ nav h1 a {
   z-index: 1000;
 }
 
-nav h1 a {
+nav h2 a {
 	font-size: 100%;
 }
 .inside {
@@ -417,7 +417,7 @@ nav h1 a {
 /*#reviews-container {
   padding: 30px 40px 80px;
 }*/
-#reviews-container h2 {
+#reviews-container h3 {
   color: #f58500;
   font-size: 1.5em;
   font-weight: 300;
